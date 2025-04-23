@@ -24,5 +24,31 @@ function getChoice(){
     }
 }
 
-console.log(getComputerChoice());
-console.log(getHumanChoice());
+//function to play round
+function playRound(humanChoice, computerChoice){
+    humanChoice = humanChoice.toLowerCase();
+    computerChoice = computerChoice.toLowerCase();
+    
+    switch(true){
+        //cases that computer wins
+        case (humanChoice === "rock" && computerChoice === "paper"):
+        case (humanChoice === "scissor" && computerChoice === "rock"):
+        case (humanChoice === "paper" && computerChoice === "scissor"):
+            console.log("You lose! " + computerChoice + " beats " + humanChoice);
+            break;
+        //cases that human wins
+        case (humanChoice === "paper" && computerChoice === "rock"):
+        case (humanChoice === "rock" && computerChoice === "scissor"):
+        case (humanChoice === "scissor" && computerChoice === "paper"):
+            console.log("You Win! " + humanChoice + " beats " + computerChoice);
+            break;
+        default:
+            console.log("Tie: " + humanChoice + " | " + computerChoice);
+    }
+}
+
+
+let humanScore = 0;
+let computerScore = 0;
+
+playRound("paper","paper");
