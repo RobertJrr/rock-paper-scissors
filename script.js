@@ -47,8 +47,17 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
 
-let humanScore = 0;
-let computerScore = 0;
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
 
-playRound("paper","paper");
+    playRound(humanChoice,computerChoice);
+}
+
+for(let i = 1; i <= 5; i++){
+    playGame();
+}
+
