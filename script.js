@@ -30,7 +30,7 @@ function getChoice(){
 }
 
 //function to display who wins the round
-function disgetWinnerWinner(roundWinner,playerChoice,computerChoice,roundArray){
+function displayWinner(roundWinner,playerChoice,computerChoice,roundArray){
     const roundText = document.createElement("h1");
     const divRoundResult = document.querySelector("#roundresult");
 
@@ -128,13 +128,13 @@ function playGame(){
             if(roundWinner === "player" && playerScore < roundsToWin){
                 playerScore++;
                 playerText.textContent = initialPlayerText + playerScore;
-                disgetWinnerWinner(roundWinner,playerChoice,computerChoice);
+                displayWinner(roundWinner,playerChoice,computerChoice);
             }else if(roundWinner === "computer" & computerScore < roundsToWin){
                 computerScore++;
                 computerText.textContent = initialComputerText + computerScore;
-                disgetWinnerWinner(roundWinner,playerChoice,computerChoice);
+                displayWinner(roundWinner,playerChoice,computerChoice);
             }else{
-                disgetWinnerWinner(roundWinner,playerChoice,computerChoice);
+                displayWinner(roundWinner,playerChoice,computerChoice);
             }
             //display game winner
             if(playerScore == roundsToWin){
