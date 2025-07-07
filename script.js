@@ -62,7 +62,7 @@ function getWinner(playerChoice,computerChoice){
     //to return string of winner
     if((playerChoice === "rock" && computerChoice === "scissors")||
          (playerChoice === "scissors" && computerChoice === "paper") ||
-         (playerChoice === "rock" && computerChoice === "paper")){
+         (playerChoice === "paper" && computerChoice === "rock")){
             return "player";
         }else if(playerChoice === computerChoice){
             return "tie";
