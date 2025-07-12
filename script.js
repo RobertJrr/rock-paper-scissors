@@ -29,30 +29,6 @@ function getChoice(){
     }
 }
 
-//function to display who wins the round
-function displayWinner(roundWinner,playerChoice,computerChoice,roundArray){
-    const roundText = document.createElement("h1");
-    const divRoundResult = document.querySelector("#roundresult");
-
-    if(roundWinner === "tie"){
-        roundText.textContent = "ITS A TIE!";
-        divRoundResult.appendChild(roundText);
-        setTimeout(function(){
-            roundText.remove();
-        },2000);
-        return;
-    }
-   
-    roundText.textContent = "Player: " + playerChoice + " | Computer: " + computerChoice;
-    divRoundResult.appendChild(roundText);
-
-     setTimeout(function(){
-            roundText.remove();
-    },2000);
-
-}
-
-
 //function to play round
 function getWinner(playerChoice,computerChoice){
 
@@ -71,20 +47,33 @@ function getWinner(playerChoice,computerChoice){
         }
 }
 
-function final(winner,gameWinnertext){
-    //create winning text
-    gameWinnertext.textContent = winner + " WINS! Press reset to play again!";
-    const finalElem = document.querySelector("#final");
-    finalElem.appendChild(gameWinnertext);
 
-    setTimeout(function(){
-        gameWinnertext.remove();
-    },4000);
+//left here, add some functionality to display the choices selected per round
+function playRound(playerChoice, computerChoice){
+    playerChoice = getChoice();
+    computerChoice = getComputerChoice();
 
+    //calling function getWinner to get winner of round
+    return getWinner(playerChoice,computerChoice);
 
 }
 
+
+//update score for winner 
+function updateAndDisplayRoundWinner(roundWinner){
+
+}
+
+
 function playGame(){
+
+
+    //computer choice and human choice
+    let playerChoice = "";
+    let computerChoice = "";
+
+    //variable for round winner
+    let roundWinner = "default";
 
     //number of rounds to win
     const roundsToWin = 5;
@@ -97,59 +86,40 @@ function playGame(){
     const playerText = document.querySelector("#player");
     const computerText = document.querySelector("#computer");
 
+    //Get reference to button nodes to play each round
+    const playButtons = document.querySelectorAll("button#rock, button#paper, button#scissors");
+    //reference to reset button
+    const resetButton = document.querySelector("button#reset");
+
     //maintaining initial score text
     let initialPlayerText = playerText.textContent;
     let initialComputerText = computerText.textContent;
-
     //setting initial score to the player and computer text
     playerText.textContent = initialPlayerText + playerScore;
     computerText.textContent = initialComputerText + computerScore;
 
-    //Get reference to button nodes to play each round
-    const playButtons = document.querySelectorAll("button#rock, button#paper, button#scissors");
-
-    //reference to reset button
-    const resetButton = document.querySelector("button#reset");
-
-    //display winner
-    const gameWinnertext = document.createElement("h2");
-
-
-    //event listener for buttons being clicked
     playButtons.forEach((button)=>{
-        button.addEventListener("click",()=>{
-            //Getting choices for player and human
-            let playerChoice = button.textContent;
-            let computerChoice = getComputerChoice();
-            //playing round based on choices
-            let roundWinner = getWinner(playerChoice,computerChoice);
+        button.addEventListener("click",function(){
+            if(button.id === "rock"){
+                roundWinner = playRound(playerChoice,computerChoice);
+            }else if(button.id === "paper"){
+                roundWinner = playRound(playerChoice,computerChoice);
+            }else if(button.id === "scissors"){
+               roundWinner = playRound(playerChoice,computerChoice);
+            }
 
-            //update score for round winner
-            if(roundWinner === "player" && playerScore < roundsToWin){
-                playerScore++;
-                playerText.textContent = initialPlayerText + playerScore;
-                displayWinner(roundWinner,playerChoice,computerChoice);
-            }else if(roundWinner === "computer" & computerScore < roundsToWin){
-                computerScore++;
-                computerText.textContent = initialComputerText + computerScore;
-                displayWinner(roundWinner,playerChoice,computerChoice);
-            }else{
-                displayWinner(roundWinner,playerChoice,computerChoice);
-            }
-            //display game winner
-            if(playerScore == roundsToWin){
-                final(roundWinner,gameWinnertext);
-            }else if(computerScore == roundsToWin){
-                final(roundWinner,gameWinnertext);
-            }
         });
+
     });
-    
+
+    console.log(roundWinner);
+
+
+
     //resetting the game upon click of reset button
     resetButton.addEventListener("click",()=>{
         playerScore = 0;
         computerScore = 0;
-
         playerText.textContent = initialPlayerText + playerScore;
         computerText.textContent = initialComputerText + computerScore;
     });

@@ -18,9 +18,18 @@ body{
     background-image: url(images/background.jpg);
     min-height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     font-family: "Arcade-Font";
+}
 
+#wrapper{
+
+    background-color: rgba(13, 13, 13, 0.532);
+    width: 600px;
+    border: 2px solid greenyellow;
+    
 }
 
 #scores{
@@ -57,18 +66,11 @@ button{
 #final{
     color: lightgreen;
     padding: 10px;
-    background-color: black;
-
-
-
 }
 
 #roundresult{
     color: lightgreen;
     padding: 10px;
-    background-color: black;
-
-
 }
 
 
