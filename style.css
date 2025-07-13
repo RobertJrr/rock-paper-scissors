@@ -73,4 +73,9 @@ button{
     padding: 10px;
 }
 
+#resultlist{
+    padding: 5px;
+    list-style: none;
+}
+
 

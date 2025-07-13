@@ -47,11 +47,22 @@ function getWinner(playerChoice,computerChoice){
         }
 }
 
+function displaySelections(playerChoice,computerChoice){
+    const roundResultList = document.querySelector("#resultlist");
+    const newLi = document.createElement("li");
+
+    //appending li for player
+    newLi.textContent = "Player Choice: " + playerChoice + " | Computer Choice: " + computerChoice;
+    roundResultList.appendChild(newLi);
+
+}
 
 //left here, add some functionality to display the choices selected per round
 function playRound(playerChoice, computerChoice){
     playerChoice = getChoice();
     computerChoice = getComputerChoice();
+    //display selection for round
+    displaySelections(playerChoice,computerChoice);
 
     //calling function getWinner to get winner of round
     return getWinner(playerChoice,computerChoice);
@@ -98,6 +109,10 @@ function playGame(){
     playerText.textContent = initialPlayerText + playerScore;
     computerText.textContent = initialComputerText + computerScore;
 
+
+
+
+    //add event listener for each button
     playButtons.forEach((button)=>{
         button.addEventListener("click",function(){
             if(button.id === "rock"){
@@ -107,12 +122,19 @@ function playGame(){
             }else if(button.id === "scissors"){
                roundWinner = playRound(playerChoice,computerChoice);
             }
+            //update winner score 
+            if(roundWinner === "player"){
+                playerScore++;
+                //update score text (DO THIS NEXT)
+            }else if(roundWinner === "computer"){
+                computerScore++;
+                //update score text 
+            }
 
         });
 
     });
 
-    console.log(roundWinner);
 
 
 
