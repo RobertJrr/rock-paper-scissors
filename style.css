@@ -32,6 +32,12 @@ body{
     
 }
 
+#roundwinnerwrapper{
+    color: lightgreen;
+    display: flex;
+    justify-content: center;
+}
+
 #scores{
     font-family: "Arcade-Font";
     color: lightgreen;
@@ -67,6 +73,7 @@ button{
     color: lightgreen;
     padding: 10px;
 }
+
 
 #roundresult{
     color: lightgreen;
