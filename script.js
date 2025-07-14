@@ -8,6 +8,11 @@
 //Keep track of the points per player for each win
 //Display the winner of total game and reset the game
 
+///Takeaways: for a simple game like this, I could have used global variables to
+//add simplicity. reducing the need for creating functions with multiple parameters
+// and re-referencing elements
+//Learning experience.....
+
 
 
 //function to get computerChoice
