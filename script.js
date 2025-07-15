@@ -10,22 +10,25 @@
     let playerScore = 0;
     let computerScore = 0;
 
-    //UI elements
-    //get reference to text
+    //UI elements - get reference to html elements
+    //reference for h1 of player score and element score
     const playerText = document.querySelector("#player");
     const computerText = document.querySelector("#computer");
-    const roundWinnerElement = document.querySelector("#roundwinner");
+
+    //reference to unordered list element, will display the choices of each player here, per round
     const ulElement = document.querySelector("#resultlist");
-    const roundElement = document.querySelector("#roundwinner");
+    //reference to h2 element, display the winner of the game
+    const gameWinnerElement = document.querySelector("#gamewinner");
+
     //Get reference to button nodes to play each round
     const playButtons = document.querySelectorAll("button#rock, button#paper, button#scissors");
     const resetButton = document.querySelector("button#reset");
 
 
-    //original player and computer string to hold
+    //to hold original player and computer text content
     let playerScoreString = playerText.textContent;
     let computerScoreString = computerText.textContent;
-    //initial score display
+    //initial score display, 0
     playerText.textContent = playerScoreString + playerScore;
     computerText.textContent = computerScoreString + computerScore;
 
@@ -68,19 +71,23 @@ function playRound(playerChoice,computerChoice){
         }else{
             winner = "computer";
             computerScore++;
+            computerText.textContent = computerScoreString + computerScore;
+
         }
         const newLi = document.createElement("li");
-            newLi.textContent = "PLAYER: " + playerChoice + " || COMPUTER: " + computerChoice;
-            ulElement.appendChild(newLi);
-            //updating scoreboard ui
-            computerText.textContent = computerScoreString + computerScore;
+        newLi.textContent = "PLAYER: " + playerChoice + " || COMPUTER: " + computerChoice;
+        ulElement.appendChild(newLi);
 
         return winner;
 }
 
 //function to display winner within UI once totalRounds reached. LEFT HERE
 function endGame(){
-
+    if(playerScore == 5){
+        gameWinnerElement.textContent = "PLAYER WINS!";
+    }else if(computerScore == 5){
+        gameWinnerElement.textContent = "COMPUTER WINS!";
+    }
 }
 
 function playGame(){
@@ -94,11 +101,14 @@ function playGame(){
             }
             //play game
             if(button.id === "rock"){
-                roundWinner = playRound(button.id,getComputerChoice());
+                playRound(button.id,getComputerChoice());
             }else if(button.id === "paper"){
-                roundWinner = playRound(button.id,getComputerChoice());
+                playRound(button.id,getComputerChoice());
             }else if(button.id === "scissors"){
-                roundWinner = playRound(button.id,getComputerChoice());
+                playRound(button.id,getComputerChoice());
+            }
+            if(playerScore == 5 || computerScore == 5){
+                endGame();
             }
         });
 
@@ -106,23 +116,26 @@ function playGame(){
 
     //resetting the game upon click of reset button
     resetButton.addEventListener("click",()=>{
+        //reset the score count
         playerScore = 0;
         computerScore = 0;
+        //reset scoreboard UI
         playerText.textContent = playerScoreString + playerScore;
         computerText.textContent = computerScoreString + computerScore;
-
         //ref to ul element and remove all child elements
         ulElement.innerHTML = "";
-        //ref to roundwinnerwrapper element and remove child element
-        roundElement.innerHTML = "";
+        //ref to h2 element to remove text
+        gameWinnerElement.innerHTML = "";
     });
 
 }
 
+//main function
 function main(){
     playGame();
 }
 
+//call to main function, execute program
 main();
 
 
